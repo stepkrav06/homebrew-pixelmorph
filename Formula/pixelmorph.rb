@@ -79,6 +79,7 @@ class Pixelmorph < Formula
     venv.pip_install "https://files.pythonhosted.org/packages/a5/ea/c25c6382f452a943b4082da5e8c1665ce29a62884e2ec80608533e8e82d5/llvmlite-0.45.1-cp311-cp311-macosx_11_0_arm64.whl"
     venv.pip_install "https://files.pythonhosted.org/packages/bf/18/71969149bfeb65a629e652b752b80167fe8a6a6f6e084f1f2060801f7f31/numba-0.62.1-cp311-cp311-macosx_11_0_arm64.whl"
     venv.pip_install resources
+    
     # `pip_install_and_link` takes a look at the virtualenv's bin directory
     # before and after installing its argument. New scripts will be symlinked
     # into `bin`. `pip_install_and_link buildpath` will install the package
