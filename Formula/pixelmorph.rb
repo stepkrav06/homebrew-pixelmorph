@@ -9,10 +9,10 @@ class Pixelmorph < Formula
   license "MIT"
 
   depends_on "python@3.10"
-  depends_on "numpy"
-  depends_on "pillow"
-  depends_on "scipy"
-  depends_on "or-tools" 
+  # depends_on "numpy"
+  # depends_on "pillow"
+  # depends_on "scipy"
+  # depends_on "or-tools" 
 
   resource "markdown-it-py" do
     url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
@@ -70,9 +70,13 @@ class Pixelmorph < Formula
   # end
 
   def install
-    venv = virtualenv_create(libexec, "python3.10", system_site_packages: true)
+    venv = virtualenv_create(libexec, "python3.10")
     # Install all of the resources declared on the formula into the virtualenv.
-    venv.pip_install resources
+    venv.pip_install "--only-binary=:all:", "numpy"
+    venv.pip_install "--only-binary=:all:", "pillow"
+    venv.pip_install "--only-binary=:all:", "scipy"
+    venv.pip_install "--only-binary=:all:", "or-tools"
+  
     venv.pip_install "https://files.pythonhosted.org/packages/ae/34/992bd12d3ff245e0801bcf6013961daa8c19c9b9c2e61cb4b8bce94566f9/llvmlite-0.45.1-cp310-cp310-macosx_11_0_arm64.whl"
     venv.pip_install "https://files.pythonhosted.org/packages/3a/9d/ffc091c0bfd7b80f66df3887a7061b6af80c8c2649902444026ee1454391/numba-0.62.1-cp310-cp310-macosx_11_0_arm64.whl"
     # `pip_install_and_link` takes a look at the virtualenv's bin directory
