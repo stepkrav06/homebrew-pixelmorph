@@ -73,7 +73,8 @@ class Pixelmorph < Formula
     venv = virtualenv_create(libexec, "python3.10")
     # Install all of the resources declared on the formula into the virtualenv.
     venv.pip_install resources
-    venv.pip_install "numba"
+    venv.pip_install "llvmlite==0.45.1"
+    venv.pip_install "numba==0.62.1"
     # `pip_install_and_link` takes a look at the virtualenv's bin directory
     # before and after installing its argument. New scripts will be symlinked
     # into `bin`. `pip_install_and_link buildpath` will install the package
