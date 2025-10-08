@@ -8,7 +8,7 @@ class Pixelmorph < Formula
   sha256 "e70eb84316a0c62c236a9310f1e952c0d83c86b218445bfdfab69a4debaed99e"
   license "MIT"
 
-  depends_on "python@3.11"
+  depends_on "python@3.10"
   depends_on "numpy"
   depends_on "pillow"
   depends_on "scipy"
