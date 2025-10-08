@@ -5,7 +5,7 @@ class Pixelmorph < Formula
   desc "Transform and animate image morphs using optimization algorithms"
   homepage "https://github.com/stepkrav06/pixelmorph"
   url "https://github.com/stepkrav06/pixelmorph/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "e70eb84316a0c62c236a9310f1e952c0d83c86b218445bfdfab69a4debaed99e"
+  sha256 "a7d73e641d2b3fb2ebafebfa0c7b33921961f149934c0e6bc23fb261bb777331"
   license "MIT"
 
   depends_on "python@3.10"
