@@ -14,6 +14,8 @@ class Pixelmorph < Formula
   depends_on "scipy"
   depends_on "or-tools" 
   depends_on "llvm"
+  depends_on "cmake" => :build
+  depends_on "pkg-config" => :build
 
   resource "markdown-it-py" do
     url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
@@ -83,6 +85,14 @@ class Pixelmorph < Formula
     ENV.append "LDFLAGS", "-L#{llvm.opt_lib}"
     ENV.append "CPPFLAGS", "-I#{llvm.opt_include}"
     ENV.append "CFLAGS", "-I#{llvm.opt_include}"
+    
+    # Additional flags for llvmlite build on ARM64
+    ENV["LLVMLITE_SKIP_LLVM_VERSION_CHECK"] = "1" if Hardware::CPU.arm?
+    ENV.append "CXXFLAGS", "-std=c++17"
+    
+    # Create a temporary directory for llvmlite build
+    ENV["TMPDIR"] = buildpath/"tmp"
+    mkdir_p ENV["TMPDIR"]
 
     virtualenv_install_with_resources
   end
