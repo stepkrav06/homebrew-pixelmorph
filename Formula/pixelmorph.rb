@@ -13,6 +13,7 @@ class Pixelmorph < Formula
   depends_on "pillow"
   depends_on "scipy"
   depends_on "or-tools" 
+  depends_on "llvm"
 
   resource "markdown-it-py" do
     url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
@@ -62,6 +63,11 @@ class Pixelmorph < Formula
   resource "wgpu" do
     url "https://files.pythonhosted.org/packages/04/09/5a3ceb382cfeaeb37bbf0adb14bf187d77e26a96952a5dfcee21f08a922e/wgpu-0.25.0.tar.gz"
     sha256 "b56ead271fb67af6758d3072e11126f7abeb22784da6aae71cb7d436c9867a7d"
+  end
+
+  resource "llvmlite" do
+    url "https://files.pythonhosted.org/packages/99/8d/5baf1cef7f9c084fb35a8afbde88074f0d6a727bc63ef764fe0e7543ba40/llvmlite-0.45.1.tar.gz"
+    sha256 "09430bb9d0bb58fc45a45a57c7eae912850bedc095cd0810a57de109c69e1c32"
   end
 
   resource "numba" do
