@@ -64,20 +64,19 @@ class Pixelmorph < Formula
     sha256 "b56ead271fb67af6758d3072e11126f7abeb22784da6aae71cb7d436c9867a7d"
   end
 
-  # resource "numba" do
-  #   url "https://files.pythonhosted.org/packages/a3/20/33dbdbfe60e5fd8e3dbfde299d106279a33d9f8308346022316781368591/numba-0.62.1.tar.gz"
-  #   sha256 "7b774242aa890e34c21200a1fc62e5b5757d5286267e71103257f4e2af0d5161"
-  # end
 
   def install
-    virtualenv_install_with_resources
-    system libexec/"bin/pip", "install", "--no-deps",
-           "https://files.pythonhosted.org/packages/ae/34/992bd12d3ff245e0801bcf6013961daa8c19c9b9c2e61cb4b8bce94566f9/llvmlite-0.45.1-cp310-cp310-macosx_11_0_arm64.whl"
-    
-    # Then install numba
-    system libexec/"bin/pip", "install", "--no-deps",
-           "https://files.pythonhosted.org/packages/3a/9d/ffc091c0bfd7b80f66df3887a7061b6af80c8c2649902444026ee1454391/numba-0.62.1-cp310-cp310-macosx_11_0_arm64.whl"
-  end
+    venv = virtualenv_create(libexec, "python3.y")
+    # Install all of the resources declared on the formula into the virtualenv.
+    venv.pip_install resources
+    venv.pip_install "numba"
+
+    # `pip_install_and_link` takes a look at the virtualenv's bin directory
+    # before and after installing its argument. New scripts will be symlinked
+    # into `bin`. `pip_install_and_link buildpath` will install the package
+    # that the formula points to, because buildpath is the location where the
+    # formula's tarball was unpacked.
+    venv.pip_install_and_link buildpath
 
   test do
     system bin/"pixelmorph", "--help"
