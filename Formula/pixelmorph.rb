@@ -13,7 +13,6 @@ class Pixelmorph < Formula
   depends_on "pillow"
   depends_on "scipy"
   depends_on "or-tools" 
-  depends_on "llvm"
 
   resource "markdown-it-py" do
     url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
@@ -65,13 +64,19 @@ class Pixelmorph < Formula
     sha256 "b56ead271fb67af6758d3072e11126f7abeb22784da6aae71cb7d436c9867a7d"
   end
 
-  resource "numba" do
-    url "https://files.pythonhosted.org/packages/a3/20/33dbdbfe60e5fd8e3dbfde299d106279a33d9f8308346022316781368591/numba-0.62.1.tar.gz"
-    sha256 "7b774242aa890e34c21200a1fc62e5b5757d5286267e71103257f4e2af0d5161"
-  end
+  # resource "numba" do
+  #   url "https://files.pythonhosted.org/packages/a3/20/33dbdbfe60e5fd8e3dbfde299d106279a33d9f8308346022316781368591/numba-0.62.1.tar.gz"
+  #   sha256 "7b774242aa890e34c21200a1fc62e5b5757d5286267e71103257f4e2af0d5161"
+  # end
 
   def install
     virtualenv_install_with_resources
+    system libexec/"bin/pip", "install", "--no-deps",
+           "https://files.pythonhosted.org/packages/09/b8/b5437b9ecb2064e89ccf67dccae0d02cd38911705112dd0dcbfa9cd9a9de/llvmlite-0.45.1-cp313-cp313-macosx_12_0_arm64.whl"
+    
+    # Then install numba
+    system libexec/"bin/pip", "install", "--no-deps",
+           "https://files.pythonhosted.org/packages/80/68/444986ed95350c0611d5c7b46828411c222ce41a0c76707c36425d27ce29/numba-0.62.1-cp313-cp313-macosx_12_0_arm64.whl"
   end
 
   test do
