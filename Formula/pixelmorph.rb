@@ -70,7 +70,7 @@ class Pixelmorph < Formula
   # end
 
   def install
-    venv = virtualenv_create(libexec, "python3.10")
+    venv = virtualenv_create(libexec, "python3.10", system_site_packages: true)
     # Install all of the resources declared on the formula into the virtualenv.
     venv.pip_install resources
     venv.pip_install "https://files.pythonhosted.org/packages/ae/34/992bd12d3ff245e0801bcf6013961daa8c19c9b9c2e61cb4b8bce94566f9/llvmlite-0.45.1-cp310-cp310-macosx_11_0_arm64.whl"
