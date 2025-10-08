@@ -8,7 +8,7 @@ class Pixelmorph < Formula
   sha256 "a7d73e641d2b3fb2ebafebfa0c7b33921961f149934c0e6bc23fb261bb777331"
   license "MIT"
 
-  depends_on "python@3.10"
+  depends_on "python@3.11"
   # depends_on "numpy"
   # depends_on "pillow"
   # depends_on "scipy"
@@ -76,9 +76,9 @@ class Pixelmorph < Formula
     venv.pip_install "https://files.pythonhosted.org/packages/cb/39/ee475903197ce709322a17a866892efb560f57900d9af2e55f86db51b0a5/pillow-11.3.0-cp311-cp311-macosx_11_0_arm64.whl"
     venv.pip_install "https://files.pythonhosted.org/packages/85/ab/5c2eba89b9416961a982346a4d6a647d78c91ec96ab94ed522b3b6baf444/scipy-1.16.2-cp311-cp311-macosx_12_0_arm64.whl"
     venv.pip_install "https://files.pythonhosted.org/packages/f7/c8/094edd5b3a238757af6260e2c1dcfd1258346ef503ce73de63703fe154b9/ortools-9.14.6206-cp311-cp311-macosx_11_0_arm64.whl"
-  
-    venv.pip_install "https://files.pythonhosted.org/packages/ae/34/992bd12d3ff245e0801bcf6013961daa8c19c9b9c2e61cb4b8bce94566f9/llvmlite-0.45.1-cp310-cp310-macosx_11_0_arm64.whl"
-    venv.pip_install "https://files.pythonhosted.org/packages/3a/9d/ffc091c0bfd7b80f66df3887a7061b6af80c8c2649902444026ee1454391/numba-0.62.1-cp310-cp310-macosx_11_0_arm64.whl"
+    venv.pip_install "https://files.pythonhosted.org/packages/a5/ea/c25c6382f452a943b4082da5e8c1665ce29a62884e2ec80608533e8e82d5/llvmlite-0.45.1-cp311-cp311-macosx_11_0_arm64.whl"
+    venv.pip_install "https://files.pythonhosted.org/packages/bf/18/71969149bfeb65a629e652b752b80167fe8a6a6f6e084f1f2060801f7f31/numba-0.62.1-cp311-cp311-macosx_11_0_arm64.whl"
+    venv.pip_install resources
     # `pip_install_and_link` takes a look at the virtualenv's bin directory
     # before and after installing its argument. New scripts will be symlinked
     # into `bin`. `pip_install_and_link buildpath` will install the package
