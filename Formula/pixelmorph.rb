@@ -1,13 +1,16 @@
 # Formula for the pixelmorph tool
 class Pixelmorph < Formula
+  include Language::Python::Virtualenv
+
   desc "Transform and animate image morphs using optimization algorithms"
-  homepage "https://github.com/stepkrav06/pixelmorph9b8d46eb8a2e8fa924da646810c34901c144584f2cdb8b3351458dca7c367f74"
+  homepage "https://github.com/stepkrav06/pixelmorph"
   url "https://github.com/stepkrav06/pixelmorph/archive/refs/tags/v0.1.tar.gz"
   sha256 "9b8d46eb8a2e8fa924da646810c34901c144584f2cdb8b3351458dca7c367f74"
   license "MIT"
 
-  depends_on "python@3.11" # Or another recent Python version
-# Python dependencies are declared as resources.
+  depends_on "python@3.11"
+
+  # Python dependencies are declared as resources.
   # Homebrew will download these and make them available to pip.
   resource "rich" do
     url "https://files.pythonhosted.org/packages/be/99/757a13b86552296a253c2ae15104a43b23a76313a37286376882200a4d36/rich-13.7.1.tar.gz"
@@ -32,10 +35,6 @@ class Pixelmorph < Formula
   resource "scipy" do
     url "https://files.pythonhosted.org/packages/4c/13/230691563f68d24177d2716186ca40b05b38d3815049b439e712716e2b86/scipy-1.14.0.tar.gz"
     sha256 "251342a632c02476d3f3ab663e025514f4886b16e41b2b365b2149e29a9883d6"
-
-    # Scipy depends on numpy, so we tell Homebrew about it
-    # This ensures numpy is available during scipy's installation
-    depends_on "numpy"
   end
 
   resource "ortools" do
@@ -52,23 +51,14 @@ class Pixelmorph < Formula
     url "https://files.pythonhosted.org/packages/1e/8c/d704c6a6de4c8350fb79144464c45b23d90702d091e9b252d6a581452a36/numba-0.60.0.tar.gz"
     sha256 "a4a824497063d30b9231f4a9b63489e2243d41e7f6424e4d6d07e66c7dd286a9"
   end
+
   def install
-    # Create a virtual environment in the libexec directory
-    venv = virtualenv_with_pretty_name(libexec, "python3.11")
-
-    # Install all dependencies defined in the resource blocks
-    venv.pip_install resources
-
-    # Install the main pixelmorph package
-    venv.pip_install_and_link buildpath
-
-    # Create the wrapper script
-    (bin/"pixelmorph").write_env_script libexec/"bin/pixelmorph", {}
+    virtualenv_install_with_resources
   end
 
   test do
     # A simple test to check if the tool is installed and can run.
     # The --help command should always exit with 0 if it works.
-    system "#{bin}/pixelmorph", "--help"
+    system bin/"pixelmorph", "--help"
   end
 end
