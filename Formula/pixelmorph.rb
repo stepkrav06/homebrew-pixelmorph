@@ -76,6 +76,14 @@ class Pixelmorph < Formula
   end
 
   def install
+    # Ensure llvmlite can find Homebrew's llvm (llvm-config, headers and libs)
+    llvm = Formula["llvm"]
+    ENV["LLVM_CONFIG"] = llvm.opt_bin/"llvm-config"
+    ENV.prepend_path "PATH", llvm.opt_bin
+    ENV.append "LDFLAGS", "-L#{llvm.opt_lib}"
+    ENV.append "CPPFLAGS", "-I#{llvm.opt_include}"
+    ENV.append "CFLAGS", "-I#{llvm.opt_include}"
+
     virtualenv_install_with_resources
   end
 
