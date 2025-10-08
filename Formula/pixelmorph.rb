@@ -13,9 +13,6 @@ class Pixelmorph < Formula
   depends_on "pillow"
   depends_on "scipy"
   depends_on "or-tools" 
-  depends_on "llvm"
-  depends_on "cmake" => :build
-  depends_on "pkg-config" => :build
 
   resource "markdown-it-py" do
     url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
@@ -67,33 +64,12 @@ class Pixelmorph < Formula
     sha256 "b56ead271fb67af6758d3072e11126f7abeb22784da6aae71cb7d436c9867a7d"
   end
 
-  resource "llvmlite" do
-    url "https://files.pythonhosted.org/packages/99/8d/5baf1cef7f9c084fb35a8afbde88074f0d6a727bc63ef764fe0e7543ba40/llvmlite-0.45.1.tar.gz"
-    sha256 "09430bb9d0bb58fc45a45a57c7eae912850bedc095cd0810a57de109c69e1c32"
-  end
-
   resource "numba" do
     url "https://files.pythonhosted.org/packages/a3/20/33dbdbfe60e5fd8e3dbfde299d106279a33d9f8308346022316781368591/numba-0.62.1.tar.gz"
     sha256 "7b774242aa890e34c21200a1fc62e5b5757d5286267e71103257f4e2af0d5161"
   end
 
   def install
-    # Ensure llvmlite can find Homebrew's llvm (llvm-config, headers and libs)
-    llvm = Formula["llvm"]
-    ENV["LLVM_CONFIG"] = llvm.opt_bin/"llvm-config"
-    ENV.prepend_path "PATH", llvm.opt_bin
-    ENV.append "LDFLAGS", "-L#{llvm.opt_lib}"
-    ENV.append "CPPFLAGS", "-I#{llvm.opt_include}"
-    ENV.append "CFLAGS", "-I#{llvm.opt_include}"
-    
-    # Additional flags for llvmlite build on ARM64
-    ENV["LLVMLITE_SKIP_LLVM_VERSION_CHECK"] = "1" if Hardware::CPU.arm?
-    ENV.append "CXXFLAGS", "-std=c++17"
-    
-    # Create a temporary directory for llvmlite build
-    ENV["TMPDIR"] = buildpath/"tmp"
-    mkdir_p ENV["TMPDIR"]
-
     virtualenv_install_with_resources
   end
 
