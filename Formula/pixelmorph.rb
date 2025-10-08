@@ -72,11 +72,11 @@ class Pixelmorph < Formula
   def install
     virtualenv_install_with_resources
     system libexec/"bin/pip", "install", "--no-deps",
-           "https://files.pythonhosted.org/packages/09/b8/b5437b9ecb2064e89ccf67dccae0d02cd38911705112dd0dcbfa9cd9a9de/llvmlite-0.45.1-cp313-cp313-macosx_12_0_arm64.whl"
+           "https://files.pythonhosted.org/packages/ae/34/992bd12d3ff245e0801bcf6013961daa8c19c9b9c2e61cb4b8bce94566f9/llvmlite-0.45.1-cp310-cp310-macosx_11_0_arm64.whl"
     
     # Then install numba
     system libexec/"bin/pip", "install", "--no-deps",
-           "https://files.pythonhosted.org/packages/80/68/444986ed95350c0611d5c7b46828411c222ce41a0c76707c36425d27ce29/numba-0.62.1-cp313-cp313-macosx_12_0_arm64.whl"
+           "https://files.pythonhosted.org/packages/3a/9d/ffc091c0bfd7b80f66df3887a7061b6af80c8c2649902444026ee1454391/numba-0.62.1-cp310-cp310-macosx_11_0_arm64.whl"
   end
 
   test do
