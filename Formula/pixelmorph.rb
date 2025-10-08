@@ -76,6 +76,7 @@ class Pixelmorph < Formula
   end
 
   def install
+    ENV["LLVM_CONFIG"] = Formula["llvm"].opt_bin/"llvm-config"
     virtualenv_install_with_resources
   end
 
