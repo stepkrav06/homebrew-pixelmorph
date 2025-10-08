@@ -65,6 +65,11 @@ class Pixelmorph < Formula
     sha256 "b56ead271fb67af6758d3072e11126f7abeb22784da6aae71cb7d436c9867a7d"
   end
 
+  resource "llvmlite" do
+    url "https://files.pythonhosted.org/packages/99/8d/5baf1cef7f9c084fb35a8afbde88074f0d6a727bc63ef764fe0e7543ba40/llvmlite-0.45.1.tar.gz"
+    sha256 "09430bb9d0bb58fc45a45a57c7eae912850bedc095cd0810a57de109c69e1c32"
+  end
+
   resource "numba" do
     url "https://files.pythonhosted.org/packages/a3/20/33dbdbfe60e5fd8e3dbfde299d106279a33d9f8308346022316781368591/numba-0.62.1.tar.gz"
     sha256 "7b774242aa890e34c21200a1fc62e5b5757d5286267e71103257f4e2af0d5161"
