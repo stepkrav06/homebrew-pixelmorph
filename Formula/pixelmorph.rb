@@ -13,7 +13,8 @@ class Pixelmorph < Formula
   depends_on "pillow"
   depends_on "scipy"
   depends_on "or-tools" 
-  depends_on "llvm"
+  depends_on "cmake" => :build
+  depends_on "llvm@14"
 
   resource "markdown-it-py" do
     url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
@@ -76,7 +77,12 @@ class Pixelmorph < Formula
   end
 
   def install
-    ENV["LLVM_CONFIG"] = Formula["llvm"].opt_bin/"llvm-config"
+    # Set environment variables for llvmlite to find LLVM 14
+    ENV["LLVM_CONFIG"] = Formula["llvm@14"].opt_bin/"llvm-config"
+    
+    # Ensure proper build flags
+    ENV.append "CFLAGS", "-I#{Formula["llvm@14"].opt_include}"
+    ENV.append "LDFLAGS", "-L#{Formula["llvm@14"].opt_lib}"
     virtualenv_install_with_resources
   end
 
